@@ -1,0 +1,55 @@
+\documentclass{MALEO_report}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{placeins}
+
+\title{Volleyball Match Statistics}
+\subtitle{Case Study, Exercise 1}
+\author{Indudhara Swamy Vivekananda (4106839)}
+\institute{Paderborn University, Germany}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{10pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\begin{document}
+\raggedbottom
+\emergencystretch=1em
+\maketitle
+\vspace*{-0.5cm}\begin{center}\includegraphics[width=2.4cm]{MALEO-logo.png}\end{center}
+
+\section{Data preparation and missingness}
+The semicolon-delimited data contain 116 matches and 29 substantive variables; the unnamed first field is a row index and was removed. Date was converted to \texttt{Date}. Missing values occur only in \texttt{Receptions.Home} (23; 19.8\%), both fourth-set fields (44; 37.9\%), and both fifth-set fields (85; 73.3\%). All other variables are complete.
+
+The set-score omissions are structurally missing not at random (MNAR): a fourth set does not exist after a 3--0 result, and a fifth set does not exist unless the first four sets are tied. They were encoded as zero, which means ``not played'' and permits a complete numeric data set without fabricating a score. Missing home receptions are plausibly missing completely at random (MCAR): Monte Carlo chi-squared tests found no association with home team ($p=.732$) or away team ($p=.998$), and Wilcoxon tests found no association with observed home points, digs, or kills (all $p>.36$). MCAR cannot be proven from observed data, but random recording loss is the most economical explanation. These values were replaced by the overall median, which is resistant to skew and extreme matches. No imputation was applied to complete columns. Finally, \texttt{Home.Win} equals one when \texttt{Winner == Home.Team}, otherwise zero. The exported complete data passed an explicit zero-missing-values assertion.
+
+\section{Normality}
+Home total points were assessed because this aggregate is central to match performance. The QQ plot shows systematic tail and curvature departures from the reference line (Figure~\ref{fig:qq}). Shapiro--Wilk gives $W=0.930$, $p=1.31\times10^{-5}$; normality is therefore rejected at $\alpha=.05$. The test is appropriate for a continuous univariate sample of this size, while the plot supplies the required shape diagnostic.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=.55\textwidth]{../../outputs/exercise1/qq_total_points_home.pdf}
+\caption{QQ plot of total points scored by the home-designated team.}\label{fig:qq}
+\end{figure}
+
+\section{Exploratory findings}
+Only 43 of 116 home-designated teams won (37.1\%). An exact two-sided binomial test against 50\% yields $p=.0068$. Thus, ``home'' should be read as a designation rather than evidence of home advantage in these international matches; tournament scheduling or team strength may confound this association.
+
+Away teams averaged more kills (49.96 versus 47.97), aces (5.15 versus 4.36), digs (60.46 versus 58.41), and total points (89.34 versus 85.29); blocks were practically equal (8.22 versus 8.07). Paired Wilcoxon tests confirm away-side differences for kills ($p=.0046$) and total points ($p=.00029$), but not blocks ($p=.716$). Aces ($p=.052$) and digs ($p=.056$) are borderline, despite paired $t$-test values below .05, so those two findings are not treated as robust. Figure~\ref{fig:diff} displays the paired distributions and also warns against interpreting means without their broad match-to-match variation.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=.66\textwidth]{../../outputs/exercise1/home_away_differences.pdf}
+\caption{Within-match home-minus-away differences; zero denotes equality.}\label{fig:diff}
+\end{figure}
+
+Kills have the clearest linear association with total points ($r=.896$ when both sides are pooled), whereas blocks and aces occupy narrower ranges (Figure~\ref{fig:components}). This is descriptive, not causal: longer matches create more opportunities for both kills and total points.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=.76\textwidth]{../../outputs/exercise1/scoring_components.pdf}
+\caption{Associations between scoring components and total points. Lines are ordinary least-squares fits with 95\% confidence bands.}\label{fig:components}
+\end{figure}
+
+\FloatBarrier
+\section{Conclusion}
+Set-score missingness is explained by the competition format, while reception missingness is plausibly MCAR under explicit, tested assumptions. The completed data reveal no home advantage, robust away-side differences in kills and total points, and a strong kill--total relationship that is partly exposure-driven.
+
+\section*{Statement of Contributions}
+Indudhara Swamy Vivekananda conducted the data preparation, statistical analysis, visualisation, interpretation, and report preparation. This statement must be updated if additional group members contributed.
+\end{document}
+

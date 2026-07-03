@@ -1,0 +1,10 @@
+best_k=4
+best_silhouette=0.3201
+pca_first_two_variance=0.5622
+dbscan_eps=2.66419
+dbscan_minPts=16
+dbscan_clusters=1
+dbscan_noise=6
+adjusted_rand=0.0282
+cramers_v_position=0.6069
+cramers_v_country=0.1338

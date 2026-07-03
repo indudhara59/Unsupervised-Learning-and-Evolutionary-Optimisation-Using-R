@@ -1,0 +1,6 @@
+
+	Shapiro-Wilk normality test
+
+data:  matches$Total.Points.Home
+W = 0.92993, p-value = 1.312e-05
+

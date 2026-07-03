@@ -1,0 +1,26 @@
+"variable","class","n_unique","n_missing"
+"Player Name","character",333,0
+"Team","character",18,0
+"Position","character",5,0
+"Age","integer",23,0
+"Height","numeric",39,0
+"Setting Errors","integer",7,0
+"Sets Per Match","numeric",66,0
+"Successful Receives","integer",60,0
+"Receiving Errors","integer",23,0
+"Receives Per Match","numeric",106,0
+"Aces","integer",22,0
+"Service Errors","integer",51,0
+"Service Attempts","integer",115,0
+"Serves Per Match","numeric",69,0
+"Blocks","integer",33,0
+"Blocking Errors","integer",53,0
+"Blocks Per Match","numeric",85,0
+"Defensive Errors","integer",41,0
+"Defensive Receptions","integer",49,0
+"Digs Per Match","numeric",144,0
+"Kills","integer",103,0
+"Attacking Errors","integer",52,0
+"Attacking Attempts","integer",97,0
+"Attacks Per Match","numeric",175,0
+"Total.Errors","numeric",123,0

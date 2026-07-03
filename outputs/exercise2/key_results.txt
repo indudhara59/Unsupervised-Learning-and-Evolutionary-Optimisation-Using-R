@@ -1,0 +1,5 @@
+n_players=339
+n_numeric=22
+mv_outliers_99pct=18
+corr_country_aces_wins=0.6268
+corr_country_serves_wins=0.5697

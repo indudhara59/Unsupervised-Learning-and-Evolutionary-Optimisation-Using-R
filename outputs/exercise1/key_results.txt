@@ -1,0 +1,7 @@
+n_matches=116
+home_wins=43
+home_win_rate=0.3707
+home_win_binom_p=0.00683163
+shapiro_W=0.92993
+shapiro_p=1.31188e-05
+corr_kills_total=0.8961
