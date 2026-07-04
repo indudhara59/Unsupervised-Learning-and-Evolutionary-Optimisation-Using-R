@@ -4,7 +4,7 @@
 \usepackage{placeins}
 
 \title{Volleyball Match Statistics}
-\subtitle{Case Study, Exercise 1}
+\subtitle{L.079.05829 Case Study -- Exercise 1}
 \author{Indudhara Swamy Vivekananda (4106839)}
 \institute{Paderborn University, Germany}
 \makeatletter
@@ -18,19 +18,34 @@
 \maketitle
 \vspace*{-0.5cm}\begin{center}\includegraphics[width=2.4cm]{MALEO-logo.png}\end{center}
 
-\section{Data preparation and missingness}
+\section{Tasks 1--4: Data preparation and missingness}
 The semicolon-delimited data contain 116 matches and 29 substantive variables; the unnamed first field is a row index and was removed. Date was converted to \texttt{Date}. Missing values occur only in \texttt{Receptions.Home} (23; 19.8\%), both fourth-set fields (44; 37.9\%), and both fifth-set fields (85; 73.3\%). All other variables are complete.
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Variable & Missing & Missing (\%) & Treatment \\
+\midrule
+Receptions.Home & 23 & 19.8 & Median (74) \\
+Set4.Home / Set4.Away & 44 each & 37.9 & Structural zero \\
+Set5.Home / Set5.Away & 85 each & 73.3 & Structural zero \\
+\bottomrule
+\end{tabular}
+\caption{Missingness and imputation decisions. Structural zero denotes a set that was not played.}
+\label{tab:missingness}
+\end{table}
 
 The set-score omissions are structurally missing not at random (MNAR): a fourth set does not exist after a 3--0 result, and a fifth set does not exist unless the first four sets are tied. They were encoded as zero, which means ``not played'' and permits a complete numeric data set without fabricating a score. Missing home receptions are plausibly missing completely at random (MCAR): Monte Carlo chi-squared tests found no association with home team ($p=.732$) or away team ($p=.998$), and Wilcoxon tests found no association with observed home points, digs, or kills (all $p>.36$). MCAR cannot be proven from observed data, but random recording loss is the most economical explanation. These values were replaced by the overall median, which is resistant to skew and extreme matches. No imputation was applied to complete columns. Finally, \texttt{Home.Win} equals one when \texttt{Winner == Home.Team}, otherwise zero. The exported complete data passed an explicit zero-missing-values assertion. The imputation used 74 receptions, the median of the 93 observed home-reception values. Structural zeros are retained only as a machine-readable ``not played' code and must not be interpreted as genuine set scores.
 
-\section{Normality}
+\section{Task 5: Normality assessment}
 Home total points were assessed because this aggregate is central to match performance. The 116 complete observations range from 45 to 112 points (range 67), with mean 85.29, median 88.5, and interquartile range 69--102.25. The QQ plot shows systematic tail and curvature departures from the reference line (Figure~\ref{fig:qq}). Shapiro--Wilk gives $W=0.930$, $p=1.31\times10^{-5}$; normality is therefore rejected at $\alpha=.05$. The test is appropriate for a continuous univariate sample of this size, while the plot supplies the required shape diagnostic.
 \begin{figure}[!htbp]\centering
 \includegraphics[width=.55\textwidth]{../../outputs/exercise1/qq_total_points_home.pdf}
 \caption{QQ plot of total points scored by the home-designated team.}\label{fig:qq}
 \end{figure}
 
-\section{Exploratory findings}
+\section{Task 6: Exploratory analysis}
 Only 43 of 116 home-designated teams won (37.1\%). An exact two-sided binomial test against 50\% yields $p=.0068$. Thus, ``home'' should be read as a designation rather than evidence of home advantage in these international matches; tournament scheduling or team strength may confound this association.
 
 Away teams averaged more kills (49.96 versus 47.97), aces (5.15 versus 4.36), digs (60.46 versus 58.41), and total points (89.34 versus 85.29); blocks were practically equal (8.22 versus 8.07). Paired Wilcoxon tests confirm away-side differences for kills ($p=.0046$) and total points ($p=.00029$), but not blocks ($p=.716$). Aces ($p=.052$) and digs ($p=.056$) are borderline, despite paired $t$-test values below .05, so those two findings are not treated as robust. Figure~\ref{fig:diff} displays the paired distributions and also warns against interpreting means without their broad match-to-match variation.
