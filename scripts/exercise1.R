@@ -1,5 +1,6 @@
 # Case Study Exercise 1: Volleyball Match Statistics
-# Author: Indudhara Swamy Vivekananda (4106839)
+# Team: Indudhara Swamy Vivekananda (4106839); Sanjana Basoor Hemanth Kumar (4108160); Rohit Mamgin (4086896)
+# Exercise lead: Indudhara Swamy Vivekananda (4106839)
 
 seed <- 366
 set.seed(seed)
